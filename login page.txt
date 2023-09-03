@@ -1,0 +1,58 @@
+from tkinter import *  # To Create GUI window
+from tkinter import messagebox  # To import some messages
+from PIL import ImageTk  # Import jpg images
+
+
+def login():
+    if usernameentry.get() == '' or passwordentry.get() == '':
+        messagebox.showerror('Error', 'Username and password cannot be empty')
+    elif usernameentry.get() == 'Rounak' and passwordentry.get() == '1234':
+        messagebox.showinfo('Success', 'Welcome')
+        window.destroy()  # old log in window will close
+        import dbs  # import the gui window in dbs
+
+    else:
+        messagebox.showerror('Error', 'Please enter correct username or password')
+
+window = Tk()
+
+window.geometry('1280x720+0+0')
+window.title('Student management system')
+
+window.resizable(False, False)  # to disable the maximum button
+
+background = ImageTk.PhotoImage(file='bg.jpg')
+
+bglabel = Label(window, image=background)  # to import the image on label
+bglabel.place(x=0, y=0)  # to show the image on screen by giving the starting coordinate
+
+loginFrame = Frame(window, bg='#f5e19a')  # to add log in , username, password
+loginFrame.place(x=800, y=200)
+
+logoImage = PhotoImage(file='logo.png')
+
+logolabel = Label(loginFrame, image=logoImage, bg='#f5e19a')
+logolabel.grid(row=0, column=0, columnspan=2, pady=10)
+
+usernameimg = PhotoImage(file='id-card.png')
+usernamelabel = Label(loginFrame, image=usernameimg, text=' Username', compound=LEFT, font=('monospace', 15, 'bold'),
+                      bg='#f5e19a')
+usernamelabel.grid(row=1, column=0, pady=10)
+usernameentry = Entry(loginFrame, font=('monospace', 10, 'bold'), bd=5)
+usernameentry.grid(row=1, column=1, pady=10, padx=20)
+
+passwordimg = PhotoImage(file='lock.png')
+passwordlabel = Label(loginFrame, image=passwordimg, text=' Password', compound=LEFT, font=('monospace', 15, 'bold'),
+                      bg='#f5e19a')
+passwordlabel.grid(row=2, column=0, pady=10)
+
+passwordentry = Entry(loginFrame, font=('monospace', 10, 'bold'), bd=5)
+passwordentry.grid(row=2, column=1, pady=10, padx=20)
+
+loginbutton = Button(loginFrame, text='Login', font=('monospace', 10, 'bold'), width=10, fg='white',
+                     bg='cornflowerblue',
+                     activebackground='cornflowerblue', activeforeground='white', cursor='hand2', command=login)
+loginbutton.grid(row=3, column=1)
+
+window.mainloop()  # keep your window on loop
+
